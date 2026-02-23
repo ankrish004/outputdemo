@@ -9,6 +9,13 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: cashing
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: dep-nod-mod-${{ hashFiles('**/package-lock.json') }}
+
+
       - name: Install dependencies
         run: npm ci
       - name: Lint code
@@ -21,6 +28,12 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: cashing
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: dep-nod-mod-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install dependencies
         run: npm ci
       - name: Build website
@@ -42,7 +55,7 @@ jobs:
           name: dist-files
       - name: output content
         run: ls
-        
+
       - name: Deploy
         run: echo "Deploying..."
 
